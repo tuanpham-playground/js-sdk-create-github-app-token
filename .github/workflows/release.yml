@@ -1,0 +1,21 @@
+name: release
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  release:
+    name: Create draft release
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-github-app-token
+        id: create-iat
+        with:
+          github_app_id: ${{ secrets.RELEASE_GITHUB_APP_ID}}
+          github_app_private_key: ${{ secrets.RELEASE_GITHUB_APP_KEY }}
+      - run: |
+          gh auth list
