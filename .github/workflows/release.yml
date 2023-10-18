@@ -12,10 +12,10 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/create-github-app-token
-        id: create-iat
+      - uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          github_app_id: ${{ secrets.RELEASE_GITHUB_APP_ID}}
-          github_app_private_key: ${{ secrets.RELEASE_GITHUB_APP_KEY }}
+          github_app_id: ${{ vars.APP_ID }}
+          github_app_private_key: ${{ secrets.PRIVATE_KEY }}
       - run: |
           gh auth list
