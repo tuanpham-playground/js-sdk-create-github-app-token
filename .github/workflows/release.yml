@@ -8,12 +8,16 @@ jobs:
   release:
     name: Create draft release
     runs-on: ubuntu-latest
+    env:
+      GH_REPO: ${{ github.repository }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/create-github-app-token@v1
         id: app-token
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
       - run: |
-          echo {{ steps.app-token.outputs.token }} | gh auth login
           gh auth status -t
