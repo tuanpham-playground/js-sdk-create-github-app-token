@@ -7,9 +7,6 @@ on:
 jobs:
   release:
     name: Create draft release
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v1
