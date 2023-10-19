@@ -20,4 +20,4 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
       - run: |
-          gh auth status -t
+          curl -H "Authorization: token ${{ steps.app-token.outputs.token }}" https://api.github.com/user
