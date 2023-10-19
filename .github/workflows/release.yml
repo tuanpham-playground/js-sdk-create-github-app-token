@@ -15,5 +15,6 @@ jobs:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
       - run: |
+          gh auth login --with-token
           gh auth status
-          echo ${{ steps.app-token.outputs.token }} | gh auth login --with-token
+          echo ${{ steps.app-token.outputs.token }}
